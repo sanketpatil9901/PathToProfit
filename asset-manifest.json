@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/PathToProfit/static/css/main.f03fbba5.css",
+    "main.js": "/PathToProfit/static/js/main.40ed49c9.js",
+    "static/js/488.75f1601f.chunk.js": "/PathToProfit/static/js/488.75f1601f.chunk.js",
+    "index.html": "/PathToProfit/index.html",
+    "main.f03fbba5.css.map": "/PathToProfit/static/css/main.f03fbba5.css.map",
+    "main.40ed49c9.js.map": "/PathToProfit/static/js/main.40ed49c9.js.map",
+    "488.75f1601f.chunk.js.map": "/PathToProfit/static/js/488.75f1601f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f03fbba5.css",
+    "static/js/main.40ed49c9.js"
+  ]
+}
