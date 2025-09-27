@@ -29,7 +29,7 @@ function App() {
   return (
     <UserDataProvider>
     <div>
-        <Router basename='Finance-management'>
+        <Router basename='PathToProfit'>
           <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path="/admin" element={<Admin/>}/>
