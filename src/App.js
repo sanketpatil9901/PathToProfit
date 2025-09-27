@@ -1,9 +1,6 @@
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
+
 import HomePage from './Components/HomePage';
 import Transit from './Components/AdminFiles/Transit';
 import Admin from './Components/AdminFiles/Admin';
@@ -29,7 +26,7 @@ function App() {
   return (
     <UserDataProvider>
     <div>
-        <Router basename='PathToProfit'>
+        <Router>
           <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path="/admin" element={<Admin/>}/>
