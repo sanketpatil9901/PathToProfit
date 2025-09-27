@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "../../cssFiles/Transit.css";
+import '../cssFiles/Transit.css'
 import { Link } from "react-router-dom";
 import axios from "axios";
-import UpdateTransactionDetails from "../UpdateTransactionDetails";
-import AdminMenu from "../AdminFiles/AdminMenu";
+import UpdateTransactionDetails from "./UpdateTransactionDetails";
+import StaffMenu from "./StaffHome";
 
 function Transit() {
   // State to hold table data
@@ -15,8 +15,6 @@ function Transit() {
       usercontact: "",
       loanamt: "",
       loanperoid: "",
-      loaninterest:"",
-      loaninterestamt:"",
       paymentdate: "",
       amount: "",
       balance: "",
@@ -64,7 +62,7 @@ function Transit() {
     <UpdateTransactionDetails userfirstname={userfirstname} balance={balance}/>
   ) : (
     <>
-    <AdminMenu/>
+    <StaffMenu/>
     <div className="App">
       <h1 className="transit-h1">Transaction Details</h1>
       <button className="transit-add-btn">
@@ -79,8 +77,6 @@ function Transit() {
             <th>Contact</th>
             <th>Loan Amount</th>
             <th>Period</th>
-            <th>Interest rate</th>
-            <th>Interest Amount</th>
             <th>Payment Date</th>
             <th>Amount</th>
             <th>Balance</th>
@@ -97,8 +93,6 @@ function Transit() {
               <td>{transaction.usercontact}</td>
               <td>{transaction.loanamt}</td>
               <td>{transaction.loanperoid}</td>
-              <td>{transaction.loaninterest}</td>
-              <td>{transaction.loaninterestamt}</td>
               <td>{transaction.paymentdate}</td>
               <td>{transaction.amount}</td>
               <td>{transaction.balance}</td>

@@ -62,6 +62,8 @@ header {
 }
 .sectioncombine {
   background-image: url("https://img.freepik.com/free-photo/panoramic-view-dubai-city-illuminated-neon-spectrum_23-2151305340.jpg?t=st=1736764886~exp=1736768486~hmac=ef11bc0b6413779fa02e1c4eeb291ea35b1f8c3b2deff1c3e84fc84d1df70012&w=996");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 /* Hero Section */
 .hero-section {

@@ -43,9 +43,9 @@ import axios from "axios";
   const update = ()=>{
     try {
       axios.post(`http://localhost:5000/api/updatetransaction?param1=${props.userfirstname}&param2=${props.balance}`,{formData})
-      .then(response=>{
-        alert(response.data)
-      })
+      .then(
+        alert("The Data is Updated")
+      )
     } catch (error) {
       
     }
@@ -131,9 +131,10 @@ import axios from "axios";
           <Label>Payment Date:</Label>
           <Input
             type="text"
-            name="loanenddate"
+            name="paymentdate"
             value={formData.paymentdate}
             onChange={handleInputChange}
+            placeholder="Enter loan paymentdate (dd/mm/yyyy)"
             required
           />
         </FormGroup>

@@ -1,23 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "../../cssFiles/TransactionsDetails.css";
-import AdminMenu from "./AdminMenu";
+import axios from "axios";
+import StaffHome from "./StaffHome";
 
-const TransactionDetails = ({ userfirstname }) => {
+const TransactionDeatails = ({ userfirstname }) => {
   const [transitData, setTransitData] = useState({
-    userfirstname: userfirstname || "",
+    userfirstname: "",
     userlastname: "",
     usercontact: "",
     loanamt: "",
-    loaninterest: "",
+    loaninterest:"",
     loanperoid: "",
-    loaninterestamt: "",
+    loaninterestamt:"",
     balance: "",
   });
-
   const [transitData1, setTransitData1] = useState({
-    paymentdate: "",
-    amount: "0",
-  });
+     paymentdate: "", 
+     amount: "0"
+     });
+  const [updated, setUpdated] = useState(false);
+
+  const fetchdata = useCallback(async () => {
+    try {
+      const result = await axios.get(`http://localhost:5000/api/getloandetails/${userfirstname}`);
+      setTransitData(result.data[0]);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [userfirstname]);
+
+  useEffect(() => {
+    fetchdata();
+  }, [fetchdata]);
+
+  const saveData = useCallback(async () => {
+    try {
+      await axios.post("http://localhost:5000/api/transationsdetails", {
+        transitData: transitData,
+        transitData1: transitData1,
+      })
+     .then(alert("Data saved successfully"));
+    } catch (err) {
+      console.log("Error while saving data:", err);
+    }
+  }, [transitData, transitData1]);
+
+  useEffect(() => {
+    if (updated) {
+      saveData();
+      setUpdated(false);
+    }
+  }, [transitData, updated, saveData]);
 
   const handlechange = (e) => {
     const { name, value } = e.target;
@@ -31,140 +64,136 @@ const TransactionDetails = ({ userfirstname }) => {
 
   const save = (e) => {
     e.preventDefault();
-
-    // Validate all fields
-    for (let key in transitData) {
-      if (transitData[key].trim() === "") {
-        alert(`Please fill the field: ${key}`);
-        return;
-      }
-    }
-    for (let key in transitData1) {
-      if (transitData1[key].trim() === "") {
-        alert(`Please fill the field: ${key}`);
-        return;
-      }
-    }
-
-    // Calculate new balance
-    const newBalance =
-      parseFloat(transitData.balance || 0) - parseFloat(transitData1.amount || 0);
-
-    setTransitData({ ...transitData, balance: newBalance.toFixed(2) });
-
-    alert("Data saved successfully!");
+    setTransitData({
+      ...transitData,
+      balance: parseFloat(transitData.balance) - parseFloat(transitData1.amount),
+    });
+    setUpdated(true);
   };
 
   return (
     <>
-      <AdminMenu />
+      <StaffHome/>
       <div className="header5">
         <div className="header2">
           <h1 className="h1">Enter Transaction Details</h1>
-
-          {/* Customer Info */}
           <div className="form-group">
-            <label>First Name</label>
+            <label htmlFor="firstname">First Name</label>
             <input
               type="text"
+              id="firstname"
               name="userfirstname"
+              required
               value={transitData.userfirstname}
               onChange={handlechange}
-              readOnly
             />
           </div>
           <div className="form-group">
-            <label>Last Name</label>
+            <label htmlFor="lastname">Last Name</label>
             <input
               type="text"
+              id="lastname"
               name="userlastname"
+              onChange={handlechange}
+              required
               value={transitData.userlastname}
-              onChange={handlechange}
             />
           </div>
           <div className="form-group">
-            <label>Contact</label>
+            <label htmlFor="contact">Contact</label>
             <input
               type="text"
+              id="contact"
               name="usercontact"
+              onChange={handlechange}
+              required
               value={transitData.usercontact}
-              onChange={handlechange}
             />
           </div>
-
-          {/* Loan Info */}
           <div className="form-group">
-            <label>Loan Amount</label>
+            <label htmlFor="loan_amt">Loan Amount</label>
             <input
               type="text"
+              id="loan_amt"
               name="loanamt"
+              onChange={handlechange}
+              required
               value={transitData.loanamt}
-              onChange={handlechange}
             />
           </div>
           <div className="form-group">
-            <label>Interest Rate</label>
+            <label htmlFor="loan_amt">Interest rate</label>
             <input
               type="text"
+              id="loan_amt"
               name="loaninterest"
+              onChange={handlechange}
+              required
               value={transitData.loaninterest}
-              onChange={handlechange}
             />
           </div>
           <div className="form-group">
-            <label>Loan Period</label>
+            <label htmlFor="peroid">Period</label>
             <input
               type="text"
+              id="peroid"
               name="loanperoid"
+              onChange={handlechange}
+              required
               value={transitData.loanperoid}
-              onChange={handlechange}
             />
           </div>
           <div className="form-group">
-            <label>Total Loan Amount</label>
+            <label htmlFor="peroid">Total Loan Amount</label>
             <input
               type="text"
+              id="peroid"
               name="loaninterestamt"
-              value={transitData.loaninterestamt}
               onChange={handlechange}
+              required
+              value={transitData.loaninterestamt}
             />
           </div>
-
-          {/* Payment Info */}
           <div className="form-group">
-            <label>Payment Date</label>
+            <label htmlFor="payement_date">Payment Date</label>
             <input
               type="text"
+              id="paymentdate"
               name="paymentdate"
+              required
               value={transitData1.paymentdate}
               onChange={handlechange1}
             />
           </div>
           <div className="form-group">
-            <label>Amount</label>
+            <label htmlFor="amount">Amount</label>
             <input
               type="text"
+              id="amount"
               name="amount"
               value={transitData1.amount}
               onChange={handlechange1}
+              required
             />
           </div>
-
           <div className="form-group">
-            <label>Balance</label>
+            <label htmlFor="balance">Balance</label>
             <input
               type="text"
+              id="balance"
               name="balance"
               value={transitData.balance}
               onChange={handlechange}
+              required
             />
           </div>
-
           <div className="form-group">
-            <button className="btn1" onClick={save}>
+            <button className="btn1" id="save" onClick={save}>
               Save
             </button>
-            <button className="btn1">Cancel</button>
+            <button className="btn1" id="cancel">
+              Cancel
+            </button>
           </div>
         </div>
       </div>
@@ -172,4 +201,4 @@ const TransactionDetails = ({ userfirstname }) => {
   );
 };
 
-export default TransactionDetails;
+export default TransactionDeatails;

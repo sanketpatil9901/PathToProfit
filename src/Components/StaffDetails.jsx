@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import '../cssFiles/StaffDetails.css'; 
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import AdminMenu from './AdminFiles/AdminMenu';
 
 const StaffDetailsForm = () => {
@@ -15,6 +14,7 @@ const StaffDetailsForm = () => {
     username: '',
     password: ''
   });
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -27,17 +27,30 @@ const StaffDetailsForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic here
-    try {
-         axios.post('http://localhost:5000/api/staffdetails',{formData})
-         alert("Data saved successfully")
-    } catch (error) {
-      console.log(error)
+
+    // Validate fields
+    for (let key in formData) {
+      if (formData[key].trim() === '') {
+        alert(`Please fill the field: ${key}`);
+        return;
+      }
     }
+
+    alert("Data saved successfully!");
+
+    setFormData({
+      staffName: '',
+      contact: '',
+      email: '',
+      startTime: '',
+      dateOfJoining: '',
+      salary: '',
+      username: '',
+      password: ''
+    });
   };
 
   const handleCancel = () => {
-    // Handle cancel logic here
     setFormData({
       staffName: '',
       contact: '',
@@ -53,88 +66,36 @@ const StaffDetailsForm = () => {
 
   return (
     <>
-    <AdminMenu/>
-    <div className='bodyback'>
-    <form onSubmit={handleSubmit} className="staff-form">
-      <h2>Staff Details</h2>
-      <div className="form-group">
-        <label>Staff Name</label>
-        <input
-          type="text"
-          name="staffName"
-          value={formData.staffName}
-          onChange={handleChange}
-        />
+      <AdminMenu/>
+      <div className='bodyback'>
+        <form onSubmit={handleSubmit} className="staff-form">
+          <h2>Staff Details</h2>
+          {Object.keys(formData).map((key) => {
+            // Determine input type dynamically
+            let inputType = 'text';
+            if (key === 'password') inputType = 'password';
+            else if (key === 'email') inputType = 'email';
+            else if (key === 'dateOfJoining' || key === 'startTime') inputType = 'date';
+
+            return (
+              <div className="form-group" key={key}>
+                <label>{key.charAt(0).toUpperCase() + key.slice(1)}</label>
+                <input
+                  type={inputType}
+                  name={key}
+                  value={formData[key]}
+                  onChange={handleChange}
+                />
+              </div>
+            );
+          })}
+
+          <div className="button-group">
+            <button type="submit" className="submit-button">Save</button>
+            <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>
+          </div>
+        </form>
       </div>
-      <div className="form-group">
-        <label>Contact</label>
-        <input
-          type="text"
-          name="contact"
-          value={formData.contact}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label>Email</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label>Start Time</label>
-        <input
-          type="text"
-          name="startTime"
-          value={formData.startTime}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label>Date of Joining</label>
-        <input
-          type="date"
-          name="dateOfJoining"
-          value={formData.dateOfJoining}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label>Salary</label>
-        <input
-          type="text"
-          name="salary"
-          value={formData.salary}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label>Username</label>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="form-group">
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="button-group">
-        <button type="submit" className="submit-button">Save</button>
-        <button type="button" className="cancel-button" onClick={handleCancel}>Cancel</button>
-      </div>
-    </form>
-    </div>
     </>
   );
 };

@@ -22,6 +22,8 @@ import AdminHome from './Components/AdminFiles/AdminHome'
 import StaffWelcomePage from './Components/StaffWelcome';
 import UpdateStaff from './Components/UpdateStaff'
 import { UserDataProvider } from './Components/AuthContext';
+import StaffCustomerList from './Components/StaffCustomerList'
+import StaffCustomerTransactions from './Components/StaffCustomerTransactions'
 
 function App() {
   return (
@@ -31,7 +33,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage/>}/>
             <Route path="/admin" element={<Admin/>}/>
-            <Route path="/adminmenu" element={<AdminMenu/>}/>
+            <Route path="/adminmenu" element={<AdminHome/>}/>
             <Route path="/loanamount" element={<TypeOfLoan/>} />
             <Route path='/customerlist' element={<CustomerList/>}/>
             <Route path='/transit' element={<Transit/>}/>
@@ -47,8 +49,11 @@ function App() {
             <Route path='/loan/vehicle' element={<LoanAmtCreation name="Vehicle"/>} />
             <Route path='/loan/education' element={<LoanAmtCreation name="Education"/>} />
             <Route path='/adminhome' element={<AdminHome/>}/>
+            <Route path='/staffcustomerlist' element={<StaffCustomerList/>}/>
+            {/* <Route path='/stafftransit' element={<StaffCustomerTransactions/>}/> */}
+            <Route path='/staffhome' element={<StaffWelcomePage/>}/>
             <Route path='/staffwelcome' element={<StaffWelcomePage/>}/>
-            <Route path='/updatestaff' element={<UpdateStaff/>}/>
+            {/* <Route path='/updatestaff' element={<UpdateStaff/>}/> */}
           </Routes>
         </Router>      
     </div>

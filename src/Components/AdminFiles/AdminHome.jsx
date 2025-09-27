@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../cssFiles/AdminHome.css'; // Import your CSS styles
 import AdminMenu from '../AdminFiles/AdminMenu';
+import { Link } from 'react-router-dom';
 
 const AdminHome = () => {
   return (
@@ -10,20 +11,20 @@ const AdminHome = () => {
       <section className="hero">
         <h2>Your Path to Financial Success</h2>
         <p>Unlock the potential of your finances with expert advice and personalized strategies.</p>
-        <button className="cta-button">Get Started</button>
+        <Link to="/loanamount"><button className="cta-button">Get Started</button></Link>
       </section>
       
       <section className="about" id="about">
         <h2>About Us</h2>
-        <p>We are dedicated to helping you achieve your financial goals through comprehensive planning and innovative solutions.</p>
+        <p style={{fontSize:"1.2em", fontWeight:"bold"}}>We are dedicated to helping you achieve your financial goals through comprehensive planning and innovative solutions.</p>
       </section>
 
-      <section className="services" id="services">
+      <section className="services" id="services" >
         <h2>Our Services</h2>
         <ul>
-          <li>Financial Planning</li>
-          <li>Investment Management</li>
-          <li>Retirement Strategies</li>
+          <li  style={{fontSize:"1.4em", fontWeight:"bold"}}>Financial Planning</li>
+          <li style={{fontSize:"1.4em", fontWeight:"bold"}}>Investment Management</li>
+          <li style={{fontSize:"1.4em", fontWeight:"bold"}}>Retirement Strategies</li>
         </ul>
       </section>
 

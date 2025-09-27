@@ -66,7 +66,7 @@ const HomePage = () => {
           <div className="hero-image"></div>
         </section>
 
-        <section className="features-section">
+        {/* <section className="features-section">
           <div className="feature" style={{ boxShadow: "2px 5px 7px" }}>
             <img
               src="https://tse3.mm.bing.net/th?id=OIP.Ep5FE_5sp4Q5zIveqrQkxwHaHa&pid=Api&P=0&h=180"
@@ -88,7 +88,7 @@ const HomePage = () => {
             />
             <p>Quick & Easy Loan Approvals</p>
           </div>
-        </section>
+        </section> */}
       </div>
       <div className="App">
         {/* <h1>High Performance Services</h1> */}
@@ -98,7 +98,7 @@ const HomePage = () => {
           direction="left"
           scrollamount="9"
         >
-          <h1>HIGH PERFORMANCE SERVICES</h1>
+          <h1 style={{color:"black"}}>HIGH PERFORMANCE SERVICES</h1>
         </marquee>
         <h2 style={{ textShadow: "2px 2px 3px red" }}>FOR ALL INDUSTRIES.</h2>
 
@@ -160,11 +160,7 @@ const HomePage = () => {
       </div>
       <footer className="footer">
         <div className="footer-content">
-          <h2 className="footer-title">Stay Connected</h2>{" "}
-          <p className="footer-text">
-            Follow us on social media and stay updated with the latest news and
-            offers.
-          </p>
+          <h3 className="footer-title" style={{paddingRight:"6px"}}>Stay Connected</h3>{" "} 
           <div className="footer-socials">
             <a href="https://facebook.com" className="social-link">
               Facebook

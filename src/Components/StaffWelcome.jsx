@@ -1,7 +1,7 @@
 import React, {  useContext } from 'react';
 import '../cssFiles/StaffWelcome.css';
 import '../cssFiles/AdminMenucss';
-import StaffMenu from './StaffMenu';
+import StaffHome from './StaffHome';
 import { UserDataContext } from './AuthContext';
 
 const StaffWelcomePage = () => {
@@ -11,7 +11,7 @@ const StaffWelcomePage = () => {
 
   return (
        <>
-          <StaffMenu/>
+          <StaffHome/>
           <div className="app"> 
             <section className="hero">
               <h2>Your Path to Financial Success</h2>

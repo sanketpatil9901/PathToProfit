@@ -1,58 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import TransactionDetails from "./TransactionDetails";
+import StaffHome from "../StaffHome";
 import "../../cssFiles/ChooseCustomerName.css";
-import axios from "axios";
-import TransactionDeatails from "./TransactionDetails";
-import AdminMenu from "../AdminFiles/AdminMenu";
 
 function ChooseCustomerName() {
-  const [selectedOption, setSelectedOption] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [selectedValue, setSelectedValue] = useState("");
-  const [showchild,setShowchild] = useState(false)
+  const [showChild, setShowChild] = useState(false);
 
-  useEffect(() => {
-    const fetchdata = async () => {
-      try {
-        const response = await axios.get(
-          "http://localhost:5000/api/customernames"
-        );
-        setSelectedOption(response.data);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchdata();
-  }, []);
+  // Static customer list
+  const staticCustomers = [
+    { id: 1, userfirstname: "Sanket Patil" },
+    { id: 2, userfirstname: "Sumant Adky" },
+    { id: 3, userfirstname: "Kiran" },
+    { id: 4, userfirstname: "Sharanu" },
+  ];
 
-  const handleChange = (event) => { 
-    setSelectedValue(event.target.value); 
+  const handleChange = (event) => {
+    setSelectedValue(event.target.value);
   };
 
-  const viewhandle=()=>{
-     setShowchild(true);
-  }
+  const viewHandle = () => {
+    if (selectedValue) {
+      setShowChild(true);
+    } else {
+      alert("Please select a customer first.");
+    }
+  };
 
-  if (loading) return <h1>Loading..</h1>;
-
-  return showchild ? <TransactionDeatails userfirstname={selectedValue}/> : (
+  return showChild ? (
+    <TransactionDetails userfirstname={selectedValue} />
+  ) : (
     <>
-    <AdminMenu/>
-    <div className="container">
-      <select value={selectedValue} onChange={handleChange}>
-        <option value="Selct an option">Select the name</option>
-        {Object.values(selectedOption).map((value, index) => {
-          return (
-            <option key={index} value={value.userfirstname}>        
-              {value.userfirstname}
+      <StaffHome />
+      <div className="container">
+        <select value={selectedValue} onChange={handleChange}>
+          <option value="">Select the name</option>
+          {staticCustomers.map((customer) => (
+            <option key={customer.id} value={customer.userfirstname}>
+              {customer.userfirstname}
             </option>
-          );
-        })}
-      </select>
-      <button onClick={viewhandle}>view</button>
-    </div>
+          ))}
+        </select>
+        <button onClick={viewHandle}>View</button>
+      </div>
     </>
   );
 }
+
 export default ChooseCustomerName;

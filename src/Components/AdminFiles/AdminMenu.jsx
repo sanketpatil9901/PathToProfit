@@ -20,7 +20,6 @@ function AdminMenu() {
           <NavbarItem><NavbarLink to="/loanamount">Account Create</NavbarLink></NavbarItem>
           <NavbarItem><NavbarLink to="/customerlist">View Customer</NavbarLink></NavbarItem>
           <NavbarItem><NavbarLink to="/transit">Transactions</NavbarLink></NavbarItem>
-          <NavbarItem><NavbarLink to="#reports">Reports</NavbarLink></NavbarItem>
         </NavbarList>
       </Navbar>
     </>

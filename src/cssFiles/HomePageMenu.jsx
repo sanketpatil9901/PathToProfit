@@ -53,7 +53,8 @@ export const NavbarLink = styled(Link)`
   padding: 10px;
 
   &:hover {
-    background-color: #f4a261;
+    background-color: #D3D3D3;
+    color:black;
     border-radius:10px;
   }
 `;
